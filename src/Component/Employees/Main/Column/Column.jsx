@@ -2,6 +2,7 @@ import React from "react";
 import * as axios from "axios";
 import "./Column.module.css";
 import classes from "./Column.module.css";
+import RadioContainer from "./Radio/RadioContainer";
 
 class Column extends React.Component {
   componentDidMount() {
@@ -17,19 +18,12 @@ class Column extends React.Component {
         {this.props.users.map((u) => (
           <div key={u.id}>
             <div>
-              <span>
-                <span>{u.lastName} </span>
-                <span>{u.firstName}</span>
-              </span>
-
-              <div>{u.dob}</div>
+              <span>{u.lastName} </span>
+              <span>{u.firstName}</span>
+              <RadioContainer />
             </div>
           </div>
         ))}
-        {/* <div className="columnNN">A</div>
-        <div className="columnNN">B</div>
-        <div className="columnNN">C</div>
-        <div className="columnNN">D</div> */}
       </div>
     );
   }
