@@ -3,31 +3,16 @@ import "./Radio.module.css";
 import classes from "./Radio.module.css";
 
 class Radio extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      active: "",
-      isActive: false,
-    };
+  constructor(props) {
+    super(props);
     this.onRadioChange = this.onRadioChange.bind(this);
-    // this.onSubmit = this.onSubmit.bind(this);
+  }
+  onRadioChange(e) {
+    this.props.onRadioChange(e.target.value);
   }
 
-  onRadioChange = (e) => {
-    debugger;
-    this.setState({
-      active: e.target.value,
-      isActive: !this.state.isActive,
-    });
-  };
-
-  //   onSubmit = (e) => {
-  //     e.preventDefault();
-  //     console.log(this.state);
-  //   };
-
   render() {
+    const isActive = this.props.isActive;
     return (
       <div className={classes.radio}>
         <form>
@@ -37,7 +22,7 @@ class Radio extends React.Component {
                 <input
                   type="radio"
                   value="not active"
-                  checked={this.state.isActive === false}
+                  checked={isActive === false}
                   onChange={this.onRadioChange}
                 />
                 <span>not active</span>
@@ -49,7 +34,7 @@ class Radio extends React.Component {
                 <input
                   type="radio"
                   value="active"
-                  checked={this.state.isActive === true}
+                  checked={isActive === true}
                   onChange={this.onRadioChange}
                 />
                 <span>active</span>

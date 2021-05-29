@@ -2,9 +2,26 @@ import React from "react";
 import * as axios from "axios";
 import "./Column.module.css";
 import classes from "./Column.module.css";
-import RadioContainer from "./Radio/RadioContainer";
+import Radio from "./Radio/Radio";
 
 class Column extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activetext: "",
+      isActive: false,
+    };
+    this.onRadioChange = this.onRadioChange.bind(this);
+  }
+
+  onRadioChange = (e) => {
+    this.setState({
+      activetext: { e } === "active" ? "active" : "not active",
+      isActive: !this.state.isActive,
+    });
+  };
+
   componentDidMount() {
     axios
       .get("https://yalantis-react-school-api.yalantis.com/api/task0/users")
@@ -13,6 +30,8 @@ class Column extends React.Component {
       });
   }
   render() {
+    const isActive = this.state.isActive;
+    const activetext = this.state.activetext;
     return (
       <div className={classes.column}>
         {this.props.users.map((u) => (
@@ -20,7 +39,12 @@ class Column extends React.Component {
             <div>
               <span>{u.lastName} </span>
               <span>{u.firstName}</span>
-              <RadioContainer />
+              <Radio
+                id={u.id}
+                isActive={isActive}
+                activetext={activetext}
+                onRadioChange={this.onRadioChange}
+              />
             </div>
           </div>
         ))}
